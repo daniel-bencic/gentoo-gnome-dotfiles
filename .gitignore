@@ -1,4 +1,8 @@
 /*
+!.config/
+.config/*
+!.config/alacritty
+!.config/nvim
 !.bashrc
 !.tmux.conf
 !.gitignore
