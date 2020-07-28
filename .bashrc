@@ -16,3 +16,4 @@ fi
 
 
 # Put your fun stuff here.
+PS1='\[\033[38;5;34m\]\u@\h\[\033[0m\]:~\$ '
