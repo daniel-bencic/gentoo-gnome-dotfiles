@@ -6,6 +6,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'lervag/vimtex'
 call plug#end()
 
 " basic configuration
@@ -32,3 +33,7 @@ nnoremap <C-Down> <C-W>j
 nnoremap <C-Up> <C-W>k
 nnoremap <C-Left> <C-W>h
 nnoremap <C-Right> <C-W>l
+
+" vimtex
+let g:tex_flavor = 'latex'
+let g:vimtex_view_general_viewer = 'evince'
