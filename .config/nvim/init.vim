@@ -53,19 +53,19 @@ inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " lsp
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
+"if executable('pyls')
+"    au User lsp_setup call lsp#register_server({
+"        \ 'name': 'pyls',
+"        \ 'cmd': {server_info->['pyls']},
+"        \ 'whitelist': ['python'],
+"        \ })
+"endif
 
 " vimtex
 let g:tex_flavor='latex'
 let g:vimtex_view_general_viewer='evince'
 
-let g:python3_host_prog='/home/me/miniconda3/envs/msc/bin/python'
+"let g:python3_host_prog='/home/me/miniconda3/envs/msc/bin/python'
 
 let g:airline_powerline_fonts = 1
 let g:Powerline_symbols='unicode'
