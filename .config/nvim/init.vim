@@ -69,7 +69,7 @@ nmap <silent> <A-x> <Plug>(ale_next_wrap)
 let g:ale_completion_enabled=1
 let g:ale_completion_autoimport=1
 let g:ale_linters_explicit=1
-let g:ale_linters={'python': ['pyls']}
+let g:ale_linters={'python': ['pyls'], 'c': ['clangd']}
 
 
 """ vimtex
