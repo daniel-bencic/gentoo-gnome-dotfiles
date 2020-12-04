@@ -1,70 +1,84 @@
-" plugin manager
+""" plugin manager
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'joshdick/onedark.vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'yggdroot/indentline'
+Plug 'jiangmiao/auto-pairs'
+Plug 'dense-analysis/ale'
+Plug 'preservim/tagbar'
 Plug 'lervag/vimtex'
-Plug 'mhinz/vim-startify'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'ncm2/ncm2-vim-lsp'
-Plug 'tpope/vim-fugitive'
 call plug#end()
 
-" basic configuration
+
+""" basic configuration
+"" editor
 set encoding=utf-8
-syntax on
+set syntax=on
 set number
 set cursorline
-set mouse=a
-set tabstop=8
-set softtabstop=0
-set shiftwidth=8
-set noexpandtab
+"set mouse=a
+set softtabstop=8 shiftwidth=8 expandtab
+set nohlsearch
+set noshowmode
 set splitbelow
 
-" colorscheme
-if exists('+termguicolors')
-  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+"" completion
+set completeopt=menuone,longest,preview
+set previewheight=8
+
+""" appearance
+"" colorscheme
+set termguicolors
 colorscheme onedark
 
-" navigation
-nnoremap <C-Down> <C-W>j
-nnoremap <C-Up> <C-W>k
-nnoremap <C-Left> <C-W>h
-nnoremap <C-Right> <C-W>l
+"" lightline
+let g:lightline={'colorscheme': 'one'}
 
-" vim-startify
-let g:startify_bookmarks=[{'r': '~/.bashrc'} ,{'v': '~/.config/nvim/init.vim'}]
 
-" autocomplete
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+""" keymaps
+"" split navigation
+nnoremap <A-h> <C-W>h
+nnoremap <A-j> <C-W>j
+nnoremap <A-k> <C-W>k
+nnoremap <A-l> <C-W>l
+nnoremap <A-c> <C-o>
 
-" lsp
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
+"" clipboard
+vnoremap <C-c> "+y
+vnoremap <C-x> "+d
+nnoremap <C-v> "+p
+inoremap <C-v> <Esc>"+pa
 
-" vimtex
+"" completion
+inoremap <expr> <Esc>   pumvisible() ? '<C-e>' : '<Esc>'
+inoremap <expr> <CR>    pumvisible() ? '<C-y><CR>' : '<CR>'
+inoremap <expr> <Tab>   pumvisible() ? '<C-n>' : '<Tab>'
+inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+
+"" ale
+nnoremap <A-e> :ALEHover<CR>
+nnoremap <A-d> :ALEGoToDefinition<CR>
+nnoremap <A-r> :ALEFindReferences<CR>
+nmap <silent> <A-z> <Plug>(ale_previous_wrap)
+nmap <silent> <A-x> <Plug>(ale_next_wrap)
+
+
+""" ale
+let g:ale_completion_enabled=1
+let g:ale_completion_autoimport=1
+let g:ale_linters_explicit=1
+let g:ale_linters={'python': ['pyls']}
+
+
+""" vimtex
 let g:tex_flavor='latex'
 let g:vimtex_view_general_viewer='evince'
 
-" powerline
-let g:airline_powerline_fonts = 1
-let g:Powerline_symbols='unicode'
+
+""" autocmds
+augroup ToggleTagbar
+        autocmd!
+        autocmd FileType python,c,cpp TagbarToggle
+augroup END
