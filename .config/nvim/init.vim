@@ -39,11 +39,11 @@ let g:lightline={'colorscheme': 'one'}
 
 """ keymaps
 "" split navigation
-nnoremap <A-h> <C-W>h
-nnoremap <A-j> <C-W>j
-nnoremap <A-k> <C-W>k
-nnoremap <A-l> <C-W>l
-nnoremap <A-c> <C-o>
+nnoremap <M-S-h> <C-W>h
+nnoremap <M-S-j> <C-W>j
+nnoremap <M-S-k> <C-W>k
+nnoremap <M-S-l> <C-W>l
+nnoremap <M-S-c> <C-o>
 
 "" clipboard
 vnoremap <C-c> "+y
@@ -52,15 +52,18 @@ nnoremap <C-v> "+p
 inoremap <C-v> <Esc>"+pa
 
 "" completion
-inoremap <expr> <Esc>   pumvisible() ? '<C-e>' : '<Esc>'
+inoremap <expr> <Esc>   pumvisible() ? '<C-y><Esc>' : '<Esc>'
 inoremap <expr> <CR>    pumvisible() ? '<C-y><CR>' : '<CR>'
 inoremap <expr> <Tab>   pumvisible() ? '<C-n>' : '<Tab>'
 inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
+inoremap <expr> <Down>  pumvisible() ? '<C-y><Down>' : '<Down>'
+inoremap <expr> <Up>    pumvisible() ? '<C-y><Up>' : '<Up>'
+
 
 "" ale
-nnoremap <A-e> :ALEHover<CR>
-nnoremap <A-d> :ALEGoToDefinition<CR>
-nnoremap <A-r> :ALEFindReferences<CR>
+nnoremap <M-e> :ALEHover<CR>
+nnoremap <M-d> :ALEGoToDefinition<CR>
+nnoremap <M-r> :ALEFindReferences<CR>
 nmap <silent> <A-z> <Plug>(ale_previous_wrap)
 nmap <silent> <A-x> <Plug>(ale_next_wrap)
 
