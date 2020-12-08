@@ -5,8 +5,10 @@ Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'yggdroot/indentline'
-Plug 'jiangmiao/auto-pairs'
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'lighttiger2505/deoplete-vim-lsp'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'preservim/tagbar'
 Plug 'lervag/vimtex'
 call plug#end()
@@ -25,7 +27,7 @@ set noshowmode
 set splitbelow
 
 "" completion
-set completeopt=menuone,longest,preview
+set completeopt=menuone,noinsert,noselect
 set previewheight=8
 
 """ appearance
@@ -60,19 +62,37 @@ inoremap <expr> <Down>  pumvisible() ? '<C-y><Down>' : '<Down>'
 inoremap <expr> <Up>    pumvisible() ? '<C-y><Up>' : '<Up>'
 
 
-"" ale
-nnoremap <M-e> :ALEHover<CR>
-nnoremap <M-d> :ALEGoToDefinition<CR>
-nnoremap <M-r> :ALEFindReferences<CR>
-nmap <silent> <A-z> <Plug>(ale_previous_wrap)
-nmap <silent> <A-x> <Plug>(ale_next_wrap)
-
-
 """ ale
-let g:ale_completion_enabled=1
-let g:ale_completion_autoimport=1
-let g:ale_linters_explicit=1
-let g:ale_linters={'python': ['pyls'], 'c': ['clangd']}
+"nnoremap <M-e> :ALEHover<CR>
+"nnoremap <M-d> :ALEGoToDefinition<CR>
+"nnoremap <M-r> :ALEFindReferences<CR>
+"nmap <silent> <A-z> <Plug>(ale_previous_wrap)
+"nmap <silent> <A-x> <Plug>(ale_next_wrap)
+
+
+""" ale lsp
+"let g:ale_linters_explicit=1
+"let g:ale_linters={'python': ['pyls'], 'c': ['clangd']}
+"call deoplete#custom#option('sources', {
+"\ '_': ['ale'],
+"\})
+
+
+""" vim-lsp
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+
+
+""" deoplete completion
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('ignore_sources', {
+\ 'python': ['around', 'buffer', 'member', 'omni']
+\})
 
 
 """ vimtex
