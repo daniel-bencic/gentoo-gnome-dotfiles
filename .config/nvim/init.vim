@@ -5,7 +5,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'yggdroot/indentline'
-"Plug 'dense-analysis/ale'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'lighttiger2505/deoplete-vim-lsp'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -63,22 +62,6 @@ inoremap <expr> <Tab>   pumvisible() ? '<C-n>' : '<Tab>'
 inoremap <expr> <S-Tab> pumvisible() ? '<C-p>' : '<S-Tab>'
 inoremap <expr> <Down>  pumvisible() ? '<C-y><Down>' : '<Down>'
 inoremap <expr> <Up>    pumvisible() ? '<C-y><Up>' : '<Up>'
-
-
-""" ale
-"nnoremap <M-e> :ALEHover<CR>
-"nnoremap <M-d> :ALEGoToDefinition<CR>
-"nnoremap <M-r> :ALEFindReferences<CR>
-"nmap <silent> <A-z> <Plug>(ale_previous_wrap)
-"nmap <silent> <A-x> <Plug>(ale_next_wrap)
-
-
-""" ale lsp
-"let g:ale_linters_explicit=1
-"let g:ale_linters={'python': ['pyls'], 'c': ['clangd']}
-"call deoplete#custom#option('sources', {
-"\ '_': ['ale'],
-"\})
 
 
 """ vim-lsp
