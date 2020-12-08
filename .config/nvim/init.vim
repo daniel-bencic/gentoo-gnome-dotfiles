@@ -9,7 +9,6 @@ Plug 'yggdroot/indentline'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'lighttiger2505/deoplete-vim-lsp'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'preservim/tagbar'
 Plug 'lervag/vimtex'
 call plug#end()
 
@@ -20,7 +19,7 @@ set encoding=utf-8
 set syntax=on
 set number
 set cursorline
-"set mouse=a
+set mouse=a
 set softtabstop=8 shiftwidth=8 expandtab
 set nohlsearch
 set noshowmode
@@ -29,6 +28,10 @@ set splitbelow
 "" completion
 set completeopt=menuone,noinsert,noselect
 set previewheight=8
+
+"" pynvim
+let g:python3_host_prog='/usr/bin/python3.8'
+
 
 """ appearance
 "" colorscheme
@@ -41,10 +44,10 @@ let g:lightline={'colorscheme': 'one'}
 
 """ keymaps
 "" split navigation
-nnoremap <M-S-h> <C-W>h
-nnoremap <M-S-j> <C-W>j
-nnoremap <M-S-k> <C-W>k
-nnoremap <M-S-l> <C-W>l
+nnoremap <M-S-Left> <C-W>h
+nnoremap <M-S-Down> <C-W>j
+nnoremap <M-S-Up> <C-W>k
+nnoremap <M-S-Right> <C-W>l
 nnoremap <M-S-c> <C-o>
 
 "" clipboard
@@ -98,10 +101,3 @@ call deoplete#custom#option('ignore_sources', {
 """ vimtex
 let g:tex_flavor='latex'
 let g:vimtex_view_general_viewer='evince'
-
-
-""" autocmds
-augroup ToggleTagbar
-        autocmd!
-        autocmd FileType python,c,cpp TagbarToggle
-augroup END
