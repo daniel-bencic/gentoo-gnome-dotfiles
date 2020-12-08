@@ -82,6 +82,14 @@ inoremap <expr> <Up>    pumvisible() ? '<C-y><Up>' : '<Up>'
 
 
 """ vim-lsp
+"" keymaps
+nnoremap <M-d> :LspDefinition<CR>
+nnoremap <M-h> :LspHover<CR>
+nnoremap <M-x> :LspNextDiagnostic<CR>
+nnoremap <M-z> :LspPreviousDiagnostic<CR>
+nnoremap <M-r> :LspReferences<CR>
+
+"" language servers
 if executable('pyls')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'pyls',
