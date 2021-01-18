@@ -1,6 +1,8 @@
 """ plugin manager
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
+Plug 'junegunn/seoul256.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
@@ -35,10 +37,11 @@ let g:python3_host_prog='/usr/bin/python3.8'
 """ appearance
 "" colorscheme
 set termguicolors
-colorscheme onedark
+let g:seoul256_background = 236
+colorscheme seoul256
 
 "" lightline
-let g:lightline={'colorscheme': 'one'}
+let g:lightline={'colorscheme': 'seoul256'}
 
 
 """ keymaps
