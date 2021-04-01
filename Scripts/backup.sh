@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ `id -u` -ne 0 ]; then
+if [ $(id -u) -ne 0 ]; then
 	1>&2 echo "Script must be run as root user."
 	exit 1
 fi

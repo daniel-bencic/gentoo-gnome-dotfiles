@@ -1,21 +1,18 @@
 """ plugin manager
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox'
-Plug 'junegunn/seoul256.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'airblade/vim-gitgutter'
-Plug 'yggdroot/indentline'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'lighttiger2505/deoplete-vim-lsp'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'lervag/vimtex'
 call plug#end()
 
 
 """ basic configuration
 "" editor
+set updatetime=300
+set signcolumn=yes
 set encoding=utf-8
 set syntax=on
 set number
@@ -26,22 +23,20 @@ set nohlsearch
 set noshowmode
 set splitbelow
 
+let g:python3_host_prog='/usr/bin/python3.8'
+
 "" completion
 set completeopt=menuone,noinsert,noselect
 set previewheight=8
-
-"" pynvim
-let g:python3_host_prog='/usr/bin/python3.8'
 
 
 """ appearance
 "" colorscheme
 set termguicolors
-let g:seoul256_background = 236
-colorscheme seoul256
+colorscheme onedark
 
 "" lightline
-let g:lightline={'colorscheme': 'seoul256'}
+let g:lightline={'colorscheme': 'onedark'}
 
 
 """ keymaps
@@ -67,29 +62,30 @@ inoremap <expr> <Down>  pumvisible() ? '<C-y><Down>' : '<Down>'
 inoremap <expr> <Up>    pumvisible() ? '<C-y><Up>' : '<Up>'
 
 
-""" vim-lsp
+""" coc
 "" keymaps
-nnoremap <M-d> :LspDefinition<CR>
-nnoremap <M-h> :LspHover<CR>
-nnoremap <M-x> :LspNextDiagnostic<CR>
-nnoremap <M-z> :LspPreviousDiagnostic<CR>
-nnoremap <M-r> :LspReferences<CR>
+nmap <M-d> <Plug>(coc-definition)
+nmap <M-t> <Plug>(coc-type-definition)
+nmap <M-m> <Plug>(coc-implementation)
+nmap <M-x> <Plug>(coc-diagnostic-next)
+nmap <M-z> <Plug>(coc-diagnostic-prev)
+nmap <M-r> <Plug>(coc-references)
 
-"" language servers
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-endif
+" Use K to show documentation in preview window.
+nnoremap <silent> <M-h> :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
 
 
-""" deoplete completion
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('ignore_sources', {
-\ 'python': ['around', 'buffer', 'member', 'omni']
-\})
+let g:coc_global_extensions = ['coc-clangd', 'coc-jedi']
 
 
 """ vimtex
