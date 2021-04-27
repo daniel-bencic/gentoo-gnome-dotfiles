@@ -22,6 +22,7 @@ set softtabstop=8 shiftwidth=8 expandtab
 set nohlsearch
 set noshowmode
 set splitbelow
+set cino+=(0
 
 let g:python3_host_prog='/usr/bin/python3.8'
 
