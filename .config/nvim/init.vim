@@ -86,7 +86,7 @@ function! s:show_documentation()
 endfunction
 
 
-let g:coc_global_extensions = ['coc-clangd', 'coc-jedi']
+let g:coc_global_extensions = ['coc-clangd', 'coc-jedi', 'coc-vimtex']
 
 
 """ vimtex
